@@ -1,0 +1,10 @@
+// coments which DO end up in c
+/* multi-line comment DOES end up in c */
+#include <stdio.h>
+
+enum Numbers { x, y, z };
+
+int main() {
+  printf("\nhello\n");
+  return 0;
+}

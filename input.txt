@@ -1,0 +1,25 @@
+# commments which don't end up in c
+// comments which DO end up in c
+### multi-line comment does not end up in C ###
+/* multi-line comment DOES end up in c */
+
+# any blank line whitespace will be passed to the C file
+# except where there is multiple lines then that will translate
+# to just one line in the C file
+include 'stdio.h'
+# it has hardcoded list of special includes like stdio.h
+#   which will be surrounded in angle brackets instead of quotes
+# ' single quote don't mean character constant anymore
+#   they mean uninterpreted string
+# to declare special types of strings we initialize special string objects
+# " double quotes offer string interpolation
+
+enum Numbers x, y, z
+
+int main ->
+  printf "\nhello\n"
+  return 0
+
+callback = ->
+
+callback()
