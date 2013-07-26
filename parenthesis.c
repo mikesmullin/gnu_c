@@ -66,4 +66,8 @@ void main() {
   // not be there anymore, or it might be someone else's function, or
   // no function at all
   (*bar)();
+
+  // obviously now you can begin to pass function pointers as arguments
+  // and execute them as callbacks
+  // we'll explore this in callback.c
 }
