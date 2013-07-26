@@ -8,11 +8,19 @@
 //void setInterval(void(*)(), int i);
 //void interval(int i, void(*)());
 
-void setTimeout(void(*cb)(), int i){}
-void delay(int i, void(*cb)()){}
-void nextTick(){}
-void setInterval(void(*cb)(), int i){}
-void interval(int i, void(*cb)()){}
+timer_callback_stack_index = 0;
+void (*timer_callback_stack[4])();
+void setTimeout(void(*cb)(), int i) {
+  timer_callback_stack[timer_callback_stack_index++] = cb
+  // TODO also note the unix timestamp in the future when it should occur
+  // TODO: learn to define my own datatype for that
+}
+void delay(int i, void(*cb)()){ setTimeout(cb, i); }
+void nextTick(void(*cb)()){ setTimeout(cb, 0); }
+void setInterval(void(*cb)(), int i){
+  setTimeout(cb, i);
+}
+void interval(int i, void(*cb)()){ setInterval(cb, i); }
 
 void main() {
   // implementing my own main event loop
@@ -20,10 +28,9 @@ void main() {
   // to get shit done quick, fast, and in a hurry! :)
   time_t started = time(NULL); // now
   printf("started at %u\n", (unsigned int) started); // unix timestamp
+  // TODO: hrmm i need to get miliseconds though, too...
 
-  // define an array of function pointers
   // TODO: how does one define a dynamically sized array? hmm
-  void (*callbacks[4])(); // oh shit, defining a dynamic function callback array could be tricky
   // there should be a generic extension you can apply to any array to give it wings
   // so it can do things like .push() .pop() .shift() and .unshift() hmmm...
   // i guess that would be an array object
@@ -31,10 +38,13 @@ void main() {
   // one that can contain anything might be fun. if it did malloc() on every add()
   // hmmm.. now we're deep in the weeds of systems programming
   // i wonder how node and java et. all do it?
-
-  // TODO: hrmm i need to get miliseconds though, too...
+  // well, a static size will work for now in this example
 
   // queue some shit up
+  delay()
+
+
+
   // loop until queue is empty
   /*
   while (1) {
