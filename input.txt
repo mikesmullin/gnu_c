@@ -47,4 +47,6 @@ callback()
 # i definitely want string interpolation
 # i should make lowercase null, false, true  translate to uppercase equivalent literals
 
+# lets find the setTimeout equivalent
+
 
