@@ -29,3 +29,20 @@ callback = ->
   # inspired by TypeScript or GorillaScript
 
 callback()
+
+# will i have labels?
+# i will keep the * dereference and & addressOf and &&label syntax
+# i see some overlap/reusability between * for dereference as well as a ruby-like array splat
+# i want to provide iterators/enumerators as powerful as Ruby Time.now(), and Hash.map() and .reduce() and .each() or foreach or for in/of
+# i want to provide ranges [0..9] and [0...10] as well
+# i want to provide all the fun logical operators from gorillascript and coffeescript like: is, and, or, isnt
+# i want to provide: if, unless
+# does C have try and catch? NO, it doesn't. you must catch your own
+#   errors similar to nodejs callback err convention
+#   well not really, it expects you to return a failure code from each function
+#   but we'll be damned if we try that
+# let's finish up with parenthesis and try some fun with lamdas
+# i am liking ansi c more and more now that i read about it :)
+# the magical bullshit other languages add on top of it is waste
+
+
