@@ -6,5 +6,13 @@ enum Numbers { x, y, z };
 
 int main() {
   printf("\nhello\n");
+  # should main always be implicit ?
+  # no cuz when we include other files they can't all have main
+  callback();
   return 0;
 }
+
+void callback() {
+
+}
+

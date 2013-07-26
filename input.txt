@@ -21,5 +21,11 @@ int main ->
   return 0
 
 callback = ->
+  # i'd probably still define an array like normal
+  int a = [] # int a[0] # useless and not the same but ok
+  int a = [1,2,3] # int a[] = { 1, 2, 3 }
+  int a = new Array(3) # compiles to: int a[3]
+  # i'd probably add some awesome type inference
+  # inspired by TypeScript or GorillaScript
 
 callback()
