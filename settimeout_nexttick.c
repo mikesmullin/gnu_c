@@ -23,7 +23,14 @@ void main() {
 
   // define an array of function pointers
   // TODO: how does one define a dynamically sized array? hmm
-  void (*callbacks[4])();
+  void (*callbacks[4])(); // oh shit, defining a dynamic function callback array could be tricky
+  // there should be a generic extension you can apply to any array to give it wings
+  // so it can do things like .push() .pop() .shift() and .unshift() hmmm...
+  // i guess that would be an array object
+  // how to implement an array object in C?
+  // one that can contain anything might be fun. if it did malloc() on every add()
+  // hmmm.. now we're deep in the weeds of systems programming
+  // i wonder how node and java et. all do it?
 
   // TODO: hrmm i need to get miliseconds though, too...
 
