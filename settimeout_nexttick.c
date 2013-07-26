@@ -9,9 +9,15 @@
 //void interval(int i, void(*)());
 
 int timer_callback_stack_index = 0;
-void (*timer_callback_stack[4])();
+typedef struct {
+  int epoch;
+  void(*cb)();
+} timer_callback;
+// TODO: i wonder how we could emulate and manipulate a function's "this" ala javascript's .apply()?
+timer_callback timer_callback_stack[4];
 void setTimeout(void(*cb)(), int i) {
-  timer_callback_stack[timer_callback_stack_index++] = cb;
+  timer_callback tcb = { epoch: i, cb: cb };
+  timer_callback_stack[timer_callback_stack_index++] = tcb;
   // TODO also note the unix timestamp in the future when it should occur
   // TODO: learn to define my own datatype for that
 }
@@ -65,6 +71,6 @@ void main() {
   */
 
   //while (1) {
-  timer_callback_stack[0]();
+  timer_callback_stack[0].cb();
   //}
 }
