@@ -16,6 +16,7 @@ typedef struct {
 // TODO: i wonder how we could emulate and manipulate a function's "this" ala javascript's .apply()?
 timer_callback timer_callback_stack[4];
 void setTimeout(void(*cb)(), int i) {
+  //double ms = gettimeofday(NULL).tv_usec/10000
   timer_callback tcb = { epoch: i, cb: cb };
   timer_callback_stack[timer_callback_stack_index++] = tcb;
   // TODO also note the unix timestamp in the future when it should occur
@@ -32,9 +33,19 @@ void main() {
   // implementing my own main event loop
   // i guess that's basically what node v8 does
   // to get shit done quick, fast, and in a hurry! :)
-  time_t started = time(NULL); // now
+  struct timeval started;
+  gettimeofday(&started, NULL); // now
   printf("started at %u\n", (unsigned int) started); // unix timestamp
   // TODO: hrmm i need to get miliseconds though, too...
+
+  printf("sleeping...\n");
+  struct timespec ms = { tv_sec: 3 }; // 5sec
+  nanosleep(&ms, NULL);
+  struct timeval now;
+  gettimeofday(&now, NULL);
+  printf("time difference is %d", (now.tv_usec-started.tv_usec)/1000);
+
+  printf("ok...\n");
 
   // TODO: how does one define a dynamically sized array? hmm
   // there should be a generic extension you can apply to any array to give it wings
