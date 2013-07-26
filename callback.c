@@ -47,3 +47,41 @@ void main() {
   function_must_be_declared_before_main(x, my_callback);
   printf("done.\n");
 }
+
+// nested functions and labels and even
+// locally declared labels are nice flow controls
+// http://tigcc.ticalc.org/doc/gnuexts.html#SEC64
+// it makes all this await() and defer() and futures flow control
+// look like excessive waste
+// even node async.js and my async2.js could benefit from this
+// consider the following:
+/*
+
+something_else = ->
+  done()
+do_something = ->
+  something_else()
+do_something()
+done = ->
+
+# vs.
+
+something_else:
+  goto done;
+do_something:
+  goto something_else;
+done:
+
+# and
+
+a(b,c) = -> d(c)
+d(e) = -> f()
+f = ->
+
+# vs.
+
+void a(void b, void c) { d(c); }
+void d(void e) { f(); }
+void f() {}
+
+*/
