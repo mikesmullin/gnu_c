@@ -8,10 +8,10 @@
 //void setInterval(void(*)(), int i);
 //void interval(int i, void(*)());
 
-timer_callback_stack_index = 0;
+int timer_callback_stack_index = 0;
 void (*timer_callback_stack[4])();
 void setTimeout(void(*cb)(), int i) {
-  timer_callback_stack[timer_callback_stack_index++] = cb
+  timer_callback_stack[timer_callback_stack_index++] = cb;
   // TODO also note the unix timestamp in the future when it should occur
   // TODO: learn to define my own datatype for that
 }
@@ -41,9 +41,9 @@ void main() {
   // well, a static size will work for now in this example
 
   // queue some shit up
-  delay()
-
-
+  delay(3000, ({void __fn__() {
+    printf("this should happen after 3 seconds");
+  }; __fn__; }));
 
   // loop until queue is empty
   /*
@@ -65,5 +65,6 @@ void main() {
   */
 
   //while (1) {
+  timer_callback_stack[0]();
   //}
 }
