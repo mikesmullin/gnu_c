@@ -45,7 +45,7 @@ callback()
 # i am liking ansi c more and more now that i read about it :)
 # the magical bullshit other languages add on top of it is waste
 # i definitely want string interpolation
-# i should make lowercase null, false, true  translate to uppercase equivalent literals
+# i should make lowercase null, false, true  translate to uppercase equivalent literals NULL, 0, 1
 
 # lets find the setTimeout equivalent
 

@@ -20,14 +20,21 @@ void main() {
   // to get shit done quick, fast, and in a hurry! :)
   time_t started = time(NULL); // now
   printf("started at %u\n", (unsigned int) started); // unix timestamp
+
+  // define an array of function pointers
+  // TODO: how does one define a dynamically sized array? hmm
+  void (*callbacks[4])();
+
   // TODO: hrmm i need to get miliseconds though, too...
 
   // queue some shit up
   // loop until queue is empty
   /*
-  while (TRUE) {
+  while (1) {
     // loop until, either:
-    //   enough miliseconds have passed that a timeout or interval should execute
+    //   (some timers are in queue; and,
+    //     enough milliseconds have passed that a timeout or interval should execute); or,
+    //   (there is some function that hasn't returned/exited yet)
     // ok so here is where the hot coffee analogy comes in
     //   a callback throws your coffee at you
     //   i wonder how that works when javascript is doing something
@@ -39,4 +46,7 @@ void main() {
     //   which makes sense cuz how else could the main event loop operate?
   }
   */
+
+  //while (1) {
+  //}
 }
