@@ -48,5 +48,12 @@ callback()
 # i should make lowercase null, false, true  translate to uppercase equivalent literals NULL, 0, 1
 
 # lets find the setTimeout equivalent
+# include and import and require should be interchangable until i find a better reason to differentiate
+#   well, include is limited to header files
+#   so import and require should include other .c files so they dont have to specified to the compiler at compile time
+#   maybe GNU C makes this possible somehow already?
 
-
+# i should use a "use strict;" mode
+  # one that also adds #pragma to output to ASM
+  # and one that requires user to specify unsigned char instead of just char
+  # and possibly ass -pedantic to the gcc compiler so it warns about that type of crap
