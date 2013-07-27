@@ -3,6 +3,7 @@
 #include <stdarg.h> /* va stuff */
 #include <stdlib.h> /* calloc, free */
 #include <string.h> /* strlen, strcpy */
+#include <stddef.h> /* size_t */
 
 extern const void * String;
 

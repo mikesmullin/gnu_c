@@ -57,3 +57,17 @@ callback()
   # one that also adds #pragma to output to ASM
   # and one that requires user to specify unsigned char instead of just char
   # and possibly ass -pedantic to the gcc compiler so it warns about that type of crap
+
+# i also want int [a,b,c] = [1,2,3]; assignment
+# and perhaps: struct {a,b,c} = a; or    Hash h
+# and i want to combine precompiler type inference to aid in destructuring
+# so i could do something like
+# struct int a, b, c; float d, e, f; cat
+# cat x = a: 1, b: 2, c: 3, d: 4.0, e: 5.0, f: 6.0
+# { a,b,c,d,e,f } = cat
+# which would translate to in C:
+# int a = cat.a, b = cat.b, c = cat.c;
+# float d = cat.d, e = cat.d, f = cat.f;
+
+
+
