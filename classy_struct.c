@@ -23,6 +23,24 @@ void main() {
   // e.g., foo->bar is equivalent to (*foo).bar
   pet * alias = &guinea;
   alias->name = "Red";
-  alias->color = "Strawberry Blonde; red, white, with some dark brown";
+  alias -> color = "Strawberry Blonde; red, white, with some dark brown";
   printf("our other pet's name is %s and her color is %s\n", guinea.name, guinea.color);
+
+  // you can initialize structs while you define them
+  // and set all or part of the possible data
+  struct Class {
+    char * name;
+    void * (*ctor)(void);
+    void * (*dtor)(void);
+  } Animal = { name: "Canine" };
+  struct Class * my_pet = &Animal;
+
+  // you can also test for the presence of data assignment like so
+  if (my_pet -> ctor) { // non-zero value
+    printf("Animal has a constructor.\n");
+  }
+  else if (my_pet->ctor == 0) { // zero?
+    // i guess when a pointer is uninitialized, it is zero
+    printf("Animal has no constructor.\n");
+  }
 }

@@ -70,4 +70,5 @@ callback()
 # float d = cat.d, e = cat.d, f = cat.f;
 
 
+# triple equals binary operator (===) should be added to work with objects to test if they are the same address or primitive type
 
