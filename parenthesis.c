@@ -56,9 +56,10 @@ void main() {
 
   // so how could i be sneaky and define my own address constant?
   printf("manually calling adddress\n");
-  const void (*bar)() = 0x40057c; // be CAREFUL with this one!
+  //const void (*bar)() = 0x40057c; // be CAREFUL with this one!
+  // another way to do it using typecast
+  const void (*bar)() = (void *)0x40058a; // be CAREFUL with this one!
   // techically you can also use the label address to jump
-  //const void (*bar)() = 0x40058a; // be CAREFUL with this one!
   // into the scope of another variable
   // but once you're in, you're on your own
   // the authors assure CRAZY ASS THINGS may happen along that journey
