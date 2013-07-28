@@ -7,5 +7,6 @@ void main() {
   }));
   A.call(A, 0);
   int i = 1;
-  A.set('a', &i);
+  A.set(&A, "a", (void *) &i);
+  printf("i is %i\n", * (int *) A.get(&A, "a"));
 }

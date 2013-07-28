@@ -1,28 +1,29 @@
 #include <stdarg.h>
 #include <assert.h>
+#include <string.h>
+#include "vendor/lambda.h"
+#include "vendor/uthash.h"
 
-// we'll be using lambdas a lot
-#define lambda(return_type, ...) \
-  __extension__ \
-  ({ \
-    return_type __fn__ __VA_ARGS__ \
-    __fn__; \
-  })
+struct Hash {
+  char key[255];
+  char value[255];
+  UT_hash_handle hh;
+};
 
 struct Object {
   // all Objects are little more than hash tables
-  void * hash_table;
+  struct Hash * hash;
   int length; // number of keys
-  void * (* set)(const void * this, char * key, void * value); // set value of given key
-  void * (* get)(const void * this, char * key); // get value of given key
+  void * (* set)(void * this, char * key, void * value); // set value of given key
+  void * (* get)(void * this, char * key); // get value of given key
 };
 
 struct Function {
   // Functions are compatible with Objects
-  void * hash_table;
+  struct Hash hash;
   int length; // number of keys
-  void * (* set)(const void * this, char * key, void * value); // set value of given key
-  void * (* get)(const void * this, char * key); // get value of given key
+  void * (* set)(void * this, char * key, void * value); // set value of given key
+  void * (* get)(void * this, char * key); // get value of given key
 
   void * (* constructor)(); // optional, if function
   void * (* destructor)(); // optional, dealloc
@@ -31,18 +32,18 @@ struct Function {
   void * (* apply)(); // calls constructor given array of arguments
 };
 
-void * Object_set(const void * _this, char * key, void * value) {
+void * Object_set(void * _this, char * key, void * value) {
   struct Object * this = _this;
-  void * pair[2] = [key, value];
-  this->hash_table = &pair;
+  struct Hash * item = (struct Hash *) malloc(sizeof(struct Hash));
+  strcpy(item->key, key);
+  strcpy(item->value, value);
+  HASH_ADD_STR(this->hash, key, item);
 }
-void * Object_get(const void * _this, char * key) {
+void * Object_get(void * _this, char * key) {
   struct Object * this = _this;
-  void * pair[2] = this->hash_table;
-  char * k = pair[0];
-  if (strcp(k, key) == 0) {
-    return pair[1];
-  }
+  struct Hash * item;
+  HASH_FIND_STR(this->hash, key, item);
+  return item->value;
 }
 void * Function_constructor(){};
 void * Function_destructor(){};
@@ -57,9 +58,9 @@ void * Function_apply(){};
 
 struct Function new_Function(void * f) {
   struct Function this = {
+    length: 1,
     constructor: f,
     destructor: Function_destructor,
-    length: 1,
     set: Object_set,
     get: Object_get,
     call: Function_call,
