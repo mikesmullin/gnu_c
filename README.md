@@ -9,3 +9,5 @@
 * http://www.cplusplus.com/reference/cstdio/printf/
 * http://www.amath.unc.edu/sysadmin/DOC4.0/c-compiler/user_guide/data.represent.app.doc.html
 * http://www.eskimo.com/~scs/cclass/int/sx8.html
+* http://gcc.gnu.org/onlinedocs/gcc/Function-Names.html
+* http://www.oualline.com/style/c03.html
