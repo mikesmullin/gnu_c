@@ -77,3 +77,9 @@ callback()
 #   and var = require "blah" which translates to the use of both an #include with a comment on what it exports and the extern keyword
 #   possibly also a Makefile modification to gcc compile line which lists the new .c file in the list
 #   remember c #include directive can also include .c files. so i can just convert to #include directive, instead. but maybe i will also end up managing Makefile for some things, too?
+
+# all functions should be able to take a variable number of arguments
+#   perhaps build some convention into the precompiler that always passes the number of arguments as the first arg
+#   to any function that takes a variable number of arguments
+#   and then c apps would need to support it
+#   or maybe i just make that my convention in C and not try to hide it, cuz that's kind of already what ppl do

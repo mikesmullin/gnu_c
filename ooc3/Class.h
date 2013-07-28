@@ -7,7 +7,7 @@ struct Class {
   // constructor could be one of:
   // a method by the same name as the object, or
   // constructor or initialize or init or ctpr
-  void * (* constructor) (void * self, va_list * app);
+  void * (* constructor) (void * self, va_list * args);
   // destructor or dealloc or dtor
   //void * (* dealloc) (void * self);
   void * (* clone) (const void * self);

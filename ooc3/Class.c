@@ -10,11 +10,11 @@ void * new (const void * _class, ...) {
   assert(p);
   * (const struct Class **) p = class;
 
-  if (class -> constructor) {
+  if (class->constructor) {
     va_list ap;
 
     va_start(ap, _class);
-    p = class -> constructor(p, & ap);
+    p = class->constructor(p, & ap);
     va_end(ap);
   }
   return p;
@@ -22,9 +22,6 @@ void * new (const void * _class, ...) {
 
 void delete (void * self) {
   const struct Class ** cp = self;
-
-  if (self && * cp && (* cp) -> dtor)
-    self = (* cp) -> dtor(self);
   free(self);
 }
 
