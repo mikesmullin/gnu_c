@@ -83,3 +83,11 @@ callback()
 #   to any function that takes a variable number of arguments
 #   and then c apps would need to support it
 #   or maybe i just make that my convention in C and not try to hide it, cuz that's kind of already what ppl do
+
+
+# I want to implement Ruby-like Array and Hash classes
+# http://ruby-doc.org/core-2.0/Array.html
+# http://www.ruby-doc.org/core-2.0/Hash.html
+# with their various enumeration methods
+# also drawing inspiration from Underscore.js
+# http://underscorejs.org/
