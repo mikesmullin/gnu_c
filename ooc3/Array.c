@@ -3,6 +3,14 @@
 #include <stdlib.h> /* calloc */
 #include <assert.h> /* assert */
 
+// TODO: split into Class.c
+// or will that prohibit class vs. instance variables per object?
+// how do you do that according to ooc?
+// we'll just have to do it ourselves
+// we know the requirements
+// basically a class variable is only instantiated once per class
+// while instance variables are instantiated unique to every new object in its constructor
+// you should be able to reference the class variable of any object.
 struct ArrayClass {
   char * name;
   size_t size;
@@ -32,20 +40,20 @@ void ArrayClass_delete (void * self) {
   free(self);
 }
 
-struct ArrayInstance {
+struct ArrayPrototype {
   unsigned long int length;
 };
 
-static void * ArrayInstance_constructor(void * _self, va_list * args) {
-  struct ArrayInstance * self = _self;
+static void * ArrayPrototype_constructor(void * _self, va_list * args) {
+  struct ArrayPrototype * self = _self;
   self->length = va_arg(*args, unsigned long int);
   return self;
 }
 
 static const struct ArrayClass ArrayClass = {
   name: "Array",
-  size: sizeof(struct ArrayInstance),
-  constructor: ArrayInstance_constructor
+  size: sizeof(struct ArrayPrototype),
+  constructor: ArrayPrototype_constructor
 };
 
 const void * Array = &ArrayClass; // exports
