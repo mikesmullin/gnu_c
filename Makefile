@@ -1,3 +1,5 @@
+ooc:
+	gcc -o bin/ooc3 ooc3/class.c ooc3/Array.c ooc3/main.c
 all:
 	gcc hello.c -o bin/hello
 	gcc math.c -lm -o bin/math
