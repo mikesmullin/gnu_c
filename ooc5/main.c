@@ -2,8 +2,8 @@
 #include <stdio.h>
 
 void main() {
-  struct Function A = Function(({ void * _(void * this, int va_length, ...){
+  struct Function A = new_Function(({ void * _(const struct Function this, int va_length, ...){
     printf("hello world!\n");
-  }; _; });
+  } _; }));
   A.call(A, 0);
 }

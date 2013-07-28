@@ -1,19 +1,14 @@
-/*  in my world,
-all functions are objects
-and all objects are hash tables
-objects don't have to have functions, though
-*/
 #include <stdarg.h>
+#include <assert.h>
 
+// all Objects are just hash tables
 struct Object {
   int length; // number of keys
   void * (* set)(); // set value of given key
   void * (* get)(); // get value of given key
 };
 
-void * Object_set(){}; // set value of given key
-void * Object_get(){}; // get value of given key
-
+// Functions are compatible with Objects
 struct Function {
   int length; // number of keys
   void * (* set)(); // set value of given key
@@ -21,31 +16,33 @@ struct Function {
   void * (* constructor)(); // optional, if function
   void * (* destructor)(); // optional, dealloc
   void * (* bind)(void * this); // change value of this
-  void * (* call)(void * this, int va_length, va_list * args); // calls constructor with variable arguments
+  void * (* call)(const struct Function this, int va_length, ...); // calls constructor with variable arguments
   void * (* apply)(); // calls constructor given array of arguments
 };
 
-void * Function_constructor(){}; // optional, if function
-void * Function_destructor(){}; // optional, dealloc
-void * Function_bind(void * this){}; // change value of this
-void * Function_call(void * _this, int va_length, ...){
+void * Object_set(){};
+void * Object_get(){};
+void * Function_constructor(){};
+void * Function_destructor(){};
+void * Function_bind(void * this){};
+void * Function_call(const struct Function this, int va_length, ...) {
   va_list args;
   // for(
-  assert(this->constructor);
-  return this->constructor();
+  assert(this.constructor);
+  return this.constructor(this, va_length, &args);
 };
-void * Function_apply(){}; // calls constructor given array of arguments
+void * Function_apply(){};
 
-void * Function(void * f) {
+struct Function new_Function(void * f) {
   struct Function this = {
-    constructor: f;
-    destructor: Function_destructor;
-    length: 1;
-    set: Object_set;
-    get: Object_get;
-    call: Function_call;
-    apply: Function_apply;
-  }
+    constructor: f,
+    destructor: Function_destructor,
+    length: 1,
+    set: Object_set,
+    get: Object_get,
+    call: Function_call,
+    apply: Function_apply
+  };
   return this;
 }
 
