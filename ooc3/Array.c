@@ -10,4 +10,4 @@ static const struct Class _Array = {
   sizeof(struct Array)
 };
 
-const void * Array = &_Array;
+const void * Array = &_Array; // exports

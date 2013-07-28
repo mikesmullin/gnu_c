@@ -1,8 +1,8 @@
+#include "Class.h"
 #include <stdarg.h>
 #include <stdlib.h>
 #include <assert.h>
 #include <stddef.h>
-#include "Class.h"
 
 void * new (const void * _class, ...) {
   const struct Class * class = _class;

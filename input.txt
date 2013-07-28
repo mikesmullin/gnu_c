@@ -72,3 +72,7 @@ callback()
 
 # triple equals binary operator (===) should be added to work with objects to test if they are the same address or primitive type
 
+# it should generate header files for all func and data definitions automatically
+# and we should come up with a similar way of doing module.exports which marks exportables
+#   and var = require "blah" which translates to the use of both the extern keyword and a Makefile modification to gcc compile line which lists the new .c file in the list
+#   unless c #include directive can also include .c files? oh nvm ya it can. so i can just convert to #include directive, instead. but maybe i will also end up managing Makefile for some things, too?
