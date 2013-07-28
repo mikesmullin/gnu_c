@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <assert.h>
-#include <stdarg.h> /* va stuff */
+#include <stdarg.h> /* va_list, va_start, va_arg, va_end */
 #include <stdlib.h> /* calloc, free */
 #include <string.h> /* strlen, strcpy */
 #include <stddef.h> /* size_t */
@@ -22,8 +22,8 @@ void * new (const void * _class, ...) {
   assert(p);
   * (const struct Class **) p = class;
 
-  if (class -> ctor)
-  {  va_list ap;
+  if (class -> ctor) {
+    va_list ap;
 
     va_start(ap, _class);
     p = class -> ctor(p, & ap);
