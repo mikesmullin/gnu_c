@@ -1,18 +1,18 @@
 #include "Class.c" /* Class, new, dealloc */
 #include <stdarg.h> /* va_arg */
 
-struct Array {
+typedef struct {
   unsigned long int length;
-};
+} ArrayPrototype;
 
 static void * ArrayPrototype_constructor(void * _self, va_list * args) {
-  struct Array * self = _self;
+  ArrayPrototype * self = _self;
   self->length = va_arg(*args, unsigned long int);
   return self;
 }
 
 static const struct Class Array = {
   name: "Array",
-  size: sizeof(struct Array),
+  size: sizeof(ArrayPrototype),
   constructor: ArrayPrototype_constructor
 };
