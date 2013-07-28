@@ -59,4 +59,20 @@ void main() {
     char * horn;
   } schnoz = { base: { smell: "bad", noise: "grunt" }, horn: "big" };
   printf("Animal smell %s, noise %s, horn %s\n", schnoz.base.smell, schnoz.base.noise, schnoz.horn);
+
+  // you can have a type and a struct by the same name?
+  typedef struct {
+    int a;
+  } A;
+  struct A {
+    int b;
+  };
+  // yes!
+
+  // you can have a type and a variable by the same name?
+  int A = 2;
+  // yes!
+  A x; // refers to type
+  struct A y; // refers to struct
+  A; // refers to variable
 }
