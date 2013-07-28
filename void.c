@@ -19,4 +19,20 @@ void main() {
   *(int*)p = 2;
 
   printf("rage against the machine %i\n", *(int*)p);
+
+  void * undefined;
+  void * null = 0x0;
+  printf("undefined is %p\n", undefined);
+  printf("null is %p\n", null);
+  printf("NULL is %p\n", NULL);
+  printf("undefined "); printf(undefined == null? "is null" : "isnt null"); printf("\n");
+  printf("undefined "); printf(undefined == NULL? "is NULL" : "isnt NULL"); printf("\n");
+  printf("undefined "); printf(undefined == 0? "is 0" : "isnt 0"); printf("\n");
+  // but the addresses of undefined and null above are unique
+  // because they are memory locations that point to zero, but each has
+  // their own unique address
+  // so if i wanted to come up with my own values like `undefined` i could
+  // possibly do it by just reserving some address that is used globally throughout
+  // my application. but that is kludgey because other apps wouldn't know what
+  // the value was
 }
