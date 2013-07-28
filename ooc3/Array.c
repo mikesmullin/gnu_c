@@ -7,12 +7,12 @@ struct ArrayClass {
   char * name;
   size_t size;
   void * (* constructor) (void * self, va_list * args);
-  void * (* dealloc) (void * self);
+  void * (* destructor) (void * self);
 };
 
 void * ArrayClass_new (const void * _class, ...) {
   const struct ArrayClass * class = _class;
-  void * p = calloc(1, class -> size);
+  void * p = calloc(1, class->size);
 
   assert(p);
   * (const struct ArrayClass **) p = class;
@@ -42,10 +42,18 @@ static void * ArrayInstance_constructor(void * _self, va_list * args) {
   return self;
 }
 
-static const struct ArrayClass _Array = {
+static void * ArrayInstance_destructor (void * _self) {
+  struct ArrayInstance * self = _self;
+  // i guess you only have to call free() on pointers you got via malloc()
+  //free(self->length); // note: expected 'void *' but argument is type 'long unsigned int'
+  return self;
+}
+
+static const struct ArrayClass ArrayClass = {
   name: "Array",
   size: sizeof(struct ArrayInstance),
-  constructor: ArrayInstance_constructor
+  constructor: ArrayInstance_constructor,
+  destructor: ArrayInstance_destructor
 };
 
-const void * Array = &_Array; // exports
+const void * Array = &ArrayClass; // exports
