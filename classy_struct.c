@@ -48,4 +48,15 @@ void main() {
   struct Test {
     int a, b, c;
   } test = { a: 1, c: 3 };
+
+
+  // you can kind of extend a struct
+  struct Animal {
+    char * smell, * noise;
+  };
+  struct Rhino {
+    struct Animal base;
+    char * horn;
+  } schnoz = { base: { smell: "bad", noise: "grunt" }, horn: "big" };
+  printf("Animal smell %s, noise %s, horn %s\n", schnoz.base.smell, schnoz.base.noise, schnoz.horn);
 }
