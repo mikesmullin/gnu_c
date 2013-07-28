@@ -43,4 +43,9 @@ void main() {
     // i guess when a pointer is uninitialized, it is zero
     printf("Animal has no constructor.\n");
   }
+
+  // you can also selectively assign values
+  struct Test {
+    int a, b, c;
+  } test = { a: 1, c: 3 };
 }

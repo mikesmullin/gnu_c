@@ -7,7 +7,7 @@ struct Array {
 void f() {};
 
 static const struct Class _Array = {
-  sizeof(struct Array)
+  size: sizeof(struct Array)
 };
 
 const void * Array = &_Array; // exports
