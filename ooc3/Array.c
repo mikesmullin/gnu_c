@@ -2,6 +2,14 @@
 #include <stdarg.h> /* va_arg */
 
 typedef struct {
+  int (*a)(void);
+  int (*c)(void);
+} ArrayClassMembers;
+
+typedef struct {
+  int (*a)(void);
+  int (*b)(void);
+  int (*c)(void);
   unsigned long int length;
 } ArrayPrototype;
 
@@ -11,7 +19,7 @@ static void * ArrayPrototype_constructor(void * _self, va_list * args) {
   return self;
 }
 
-static const struct Class Array = {
+static const Class Array = {
   name: "Array",
   size: sizeof(ArrayPrototype),
   constructor: ArrayPrototype_constructor

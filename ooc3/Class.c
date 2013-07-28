@@ -3,33 +3,33 @@
 #include <stdlib.h> /* calloc */
 #include <assert.h> /* assert */
 
-struct Class {
+typedef struct {
   char * name;
   size_t size;
-  void * (* constructor) (void * self, va_list * args);
-  void * (* destructor) (void * self);
-};
+  void * (* constructor) (const Class, va_list *);
+  void * (* destructor) (const Class);
+  void * prototype;
+} Class;
 
-void * new (const struct Class _class, ...) {
-  const struct Class * class = &_class;
-  void * p = calloc(1, class->size);
-
+void * new (const Class class, ...) {
+  void * prototype = calloc(1, class.size);
   assert(p);
-  * (const struct Class **) p = class;
+
+  class->prototype = prototype;
+  * (const Class *) prototype = class;
 
   if (class->constructor) {
-    va_list ap;
-
-    va_start(ap, _class);
-    p = class->constructor(p, & ap);
-    va_end(ap);
+    va_list args;
+    va_start(args, _class);
+    prototype = class->constructor(prototype, &args);
+    va_end(args);
   }
-  return p;
+  return prototype;
 }
 
-void dealloc (void * self) {
-  const struct Class ** cp = self;
-  if (self && * cp && (* cp) -> destructor)
-    self = (* cp) -> destructor(self);
-  free(self);
-}
+//void dealloc (void * self) {
+//  const struct Class ** cp = self;
+//  if (self && * cp && (* cp) -> destructor)
+//    self = (* cp) -> destructor(self);
+//  free(self);
+//}
