@@ -42,18 +42,10 @@ static void * ArrayInstance_constructor(void * _self, va_list * args) {
   return self;
 }
 
-static void * ArrayInstance_destructor (void * _self) {
-  struct ArrayInstance * self = _self;
-  // i guess you only have to call free() on pointers you got via malloc()
-  //free(self->length); // note: expected 'void *' but argument is type 'long unsigned int'
-  return self;
-}
-
 static const struct ArrayClass ArrayClass = {
   name: "Array",
   size: sizeof(struct ArrayInstance),
-  constructor: ArrayInstance_constructor,
-  destructor: ArrayInstance_destructor
+  constructor: ArrayInstance_constructor
 };
 
 const void * Array = &ArrayClass; // exports
