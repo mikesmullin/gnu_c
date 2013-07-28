@@ -74,5 +74,6 @@ callback()
 
 # it should generate header files for all func and data definitions automatically
 # and we should come up with a similar way of doing module.exports which marks exportables
-#   and var = require "blah" which translates to the use of both the extern keyword and a Makefile modification to gcc compile line which lists the new .c file in the list
-#   unless c #include directive can also include .c files? oh nvm ya it can. so i can just convert to #include directive, instead. but maybe i will also end up managing Makefile for some things, too?
+#   and var = require "blah" which translates to the use of both an #include with a comment on what it exports and the extern keyword
+#   possibly also a Makefile modification to gcc compile line which lists the new .c file in the list
+#   remember c #include directive can also include .c files. so i can just convert to #include directive, instead. but maybe i will also end up managing Makefile for some things, too?

@@ -1,8 +1,7 @@
-#include "Class.h"
-#include <stdarg.h>
-#include <stdlib.h>
-#include <assert.h>
-#include <stddef.h>
+#include "Class.h" /* Class, new, delete, clone */
+#include <stdarg.h> /* va_list, va_start, va_end */
+#include <stdlib.h> /* calloc */
+#include <assert.h> /* assert */
 
 void * new (const void * _class, ...) {
   const struct Class * class = _class;

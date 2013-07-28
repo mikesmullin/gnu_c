@@ -1,5 +1,5 @@
-#include <stddef.h>
-#include <stdarg.h>
+#include <stddef.h> /* size_t */
+#include <stdarg.h> /* va_list */
 
 struct Class {
   size_t size;

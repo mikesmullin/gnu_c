@@ -1,4 +1,4 @@
-#include "Class.h"
+#include "Class.h" /* Class */
 
 struct Array {
   const void * class;

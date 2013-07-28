@@ -1,5 +1,5 @@
-#include <stdio.h>
-#include "Class.h"
+#include "Class.h" /* new, delete, clone */
+#include <stdio.h> /* printf */
 
 extern const void * Array;
 
