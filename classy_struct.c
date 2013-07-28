@@ -70,9 +70,11 @@ void main() {
   // yes!
 
   // you can have a type and a variable by the same name?
-  int A = 2;
-  // yes!
+  //int A = 2; // error: 'A' redeclared as different kind of symbol
+  // NO!
   A x; // refers to type
   struct A y; // refers to struct
-  A; // refers to variable
+  A; // refers to type or variable, whichever was declared
+  // notice that referring to a type like this raises:
+  // warning: useless type name in empty declaration
 }
