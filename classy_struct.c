@@ -85,7 +85,7 @@ void main() {
   struct B { int a; };
   int B;
 
-  // undefined struct attributes are 0
-  struct C { int a, b; } c = { a: 1 };
-  printf("c.b is %p\n", &c.b);
+  // undefined struct attributes are 0 or NULL depending on the type
+  struct C { void * a, * b; } c = { a: NULL };
+  printf("c.b is %p\n", c.b);
 }
