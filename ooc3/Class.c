@@ -29,5 +29,7 @@ void * new (const struct Class _class, ...) {
 
 void dealloc (void * self) {
   const struct Class ** cp = self;
+  if (self && * cp && (* cp) -> destructor)
+    self = (* cp) -> destructor(self);
   free(self);
 }

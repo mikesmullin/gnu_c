@@ -2,8 +2,8 @@
 #include <stdio.h> /* printf */
 
 void main() {
-  ArrayPrototype * a = new(Array, 0); // length 0
-  ArrayPrototype * b = new(Array, 3);  // undefined x length 3
+  struct Array * a = new(Array, 0); // length 0
+  struct Array * b = new(Array, 3);  // undefined x length 3
 
   printf("instance variables:\n");
   printf("a->length is %lu\n", a->length);

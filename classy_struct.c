@@ -74,7 +74,14 @@ void main() {
   // NO!
   A x; // refers to type
   struct A y; // refers to struct
-  A; // refers to type or variable, whichever was declared
+  //A; // refers to type or variable, whichever was declared
   // notice that referring to a type like this raises:
   // warning: useless type name in empty declaration
+
+
+  // maybe if i don't declare it as a type
+  // then i can just be clear and reference it with struct prefix
+  // and still have all three by the same name
+  struct B { int a; };
+  int B;
 }
