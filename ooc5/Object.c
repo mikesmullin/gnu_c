@@ -1,6 +1,14 @@
 #include <stdarg.h>
 #include <assert.h>
 
+// we'll be using lambdas a lot
+#define lambda(return_type, ...) \
+  __extension__ \
+  ({ \
+    return_type __fn__ __VA_ARGS__ \
+    __fn__; \
+  })
+
 // all Objects are just hash tables
 struct Object {
   int length; // number of keys

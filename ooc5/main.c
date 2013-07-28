@@ -2,8 +2,9 @@
 #include <stdio.h>
 
 void main() {
-  struct Function A = new_Function(({ void * _(const struct Function this, int va_length, ...){
+  struct Function A = new_Function(lambda(void *, (const struct Function this, int va_length, ...) {
     printf("hello world!\n");
-  } _; }));
+  }));
   A.call(A, 0);
+  //A.set('a', {{
 }
