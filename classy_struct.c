@@ -84,4 +84,8 @@ void main() {
   // and still have all three by the same name
   struct B { int a; };
   int B;
+
+  // undefined struct attributes are 0
+  struct C { int a, b; } c = { a: 1 };
+  printf("c.b is %p\n", &c.b);
 }
