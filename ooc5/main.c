@@ -6,5 +6,6 @@ void main() {
     printf("hello world!\n");
   }));
   A.call(A, 0);
-  //A.set('a', {{
+  int i = 1;
+  A.set('a', &i);
 }

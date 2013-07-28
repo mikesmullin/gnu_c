@@ -9,30 +9,44 @@
     __fn__; \
   })
 
-// all Objects are just hash tables
 struct Object {
+  // all Objects are little more than hash tables
+  void * hash_table;
   int length; // number of keys
-  void * (* set)(); // set value of given key
-  void * (* get)(); // get value of given key
+  void * (* set)(const void * this, char * key, void * value); // set value of given key
+  void * (* get)(const void * this, char * key); // get value of given key
 };
 
-// Functions are compatible with Objects
 struct Function {
+  // Functions are compatible with Objects
+  void * hash_table;
   int length; // number of keys
-  void * (* set)(); // set value of given key
-  void * (* get)(); // get value of given key
+  void * (* set)(const void * this, char * key, void * value); // set value of given key
+  void * (* get)(const void * this, char * key); // get value of given key
+
   void * (* constructor)(); // optional, if function
   void * (* destructor)(); // optional, dealloc
-  void * (* bind)(void * this); // change value of this
+  void * (* bind)(const void * this); // change value of this
   void * (* call)(const struct Function this, int va_length, ...); // calls constructor with variable arguments
   void * (* apply)(); // calls constructor given array of arguments
 };
 
-void * Object_set(){};
-void * Object_get(){};
+void * Object_set(const void * _this, char * key, void * value) {
+  struct Object * this = _this;
+  void * pair[2] = [key, value];
+  this->hash_table = &pair;
+}
+void * Object_get(const void * _this, char * key) {
+  struct Object * this = _this;
+  void * pair[2] = this->hash_table;
+  char * k = pair[0];
+  if (strcp(k, key) == 0) {
+    return pair[1];
+  }
+}
 void * Function_constructor(){};
 void * Function_destructor(){};
-void * Function_bind(void * this){};
+void * Function_bind(const void * this){};
 void * Function_call(const struct Function this, int va_length, ...) {
   va_list args;
   // for(
