@@ -3,23 +3,19 @@
 #include <stdlib.h> /* calloc */
 #include <assert.h> /* assert */
 
-struct Class {
+struct ArrayClass {
   char * name;
   size_t size;
-  // constructor could be one of:
-  // a method by the same name as the object, or
-  // constructor or initialize or init or ctpr
   void * (* constructor) (void * self, va_list * args);
-  // destructor or dealloc or dtor
   void * (* dealloc) (void * self);
 };
 
-void * new (const void * _class, ...) {
-  const struct Class * class = _class;
+void * ArrayClass_new (const void * _class, ...) {
+  const struct ArrayClass * class = _class;
   void * p = calloc(1, class -> size);
 
   assert(p);
-  * (const struct Class **) p = class;
+  * (const struct ArrayClass **) p = class;
 
   if (class->constructor) {
     va_list ap;
@@ -31,25 +27,25 @@ void * new (const void * _class, ...) {
   return p;
 }
 
-void delete (void * self) {
-  const struct Class ** cp = self;
+void ArrayClass_delete (void * self) {
+  const struct ArrayClass ** cp = self;
   free(self);
 }
 
-struct Array {
+struct ArrayInstance {
   unsigned long int length;
 };
 
-static void * Array_constructor(void * _self, va_list * args) {
-  struct Array * self = _self;
+static void * ArrayInstance_constructor(void * _self, va_list * args) {
+  struct ArrayInstance * self = _self;
   self->length = va_arg(*args, unsigned long int);
   return self;
 }
 
-static const struct Class _Array = {
+static const struct ArrayClass _Array = {
   name: "Array",
-  size: sizeof(struct Array),
-  constructor: Array_constructor
+  size: sizeof(struct ArrayInstance),
+  constructor: ArrayInstance_constructor
 };
 
 const void * Array = &_Array; // exports
