@@ -10,11 +10,11 @@ void * new (const void * _class, ...) {
   assert(p);
   * (const struct Class **) p = class;
 
-  if (class -> ctor) {
+  if (class -> constructor) {
     va_list ap;
 
     va_start(ap, _class);
-    p = class -> ctor(p, & ap);
+    p = class -> constructor(p, & ap);
     va_end(ap);
   }
   return p;

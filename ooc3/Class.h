@@ -2,11 +2,15 @@
 #include <stdarg.h> /* va_list */
 
 struct Class {
+  char * name;
   size_t size;
-  void * (* ctor) (void * self, va_list * app);
-  void * (* dtor) (void * self);
+  // constructor could be one of:
+  // a method by the same name as the object, or
+  // constructor or initialize or init or ctpr
+  void * (* constructor) (void * self, va_list * app);
+  // destructor or dealloc or dtor
+  //void * (* dealloc) (void * self);
   void * (* clone) (const void * self);
-  int (* differ) (const void * self, const void * b);
 };
 
 void * new (const void * class, ...);
