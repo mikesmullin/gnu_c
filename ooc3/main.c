@@ -58,4 +58,27 @@ void main() {
   // which is really just a hash table that can store any kind of data type
   // strong typing advocates will want a hash table that still validates its types
 
+  /*
+  compiling this way will make the C language less readable for
+  hardcore ANSI C people, possibly
+  i mean for every time i use dot notation it would be translating like:
+  a.c = 2
+  becomes:
+  a.set('c', 2);
+  which then means we also have to implement something like .call() and .apply()
+  because we wouldn't want the user unable to define a 'set' method of their own
+  so theirs would get called by translating to
+  a.set 2
+  becomes
+  a.call('set', 2);
+
+  but i'm already having to do something similar with function arguments
+  its basically like a set of opinionated macros based on well-established design patterns
+  but it doesn't have to be interpreted by a tokenizer at runtime
+  it could compile down to 'bytecode'
+  with almost no middle layers inbetween
+
+  i think i'll try implementing this with an inefficient hash object to start
+  then switch to judy array as/if i see fit
+  */
 }
