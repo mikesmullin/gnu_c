@@ -50,7 +50,6 @@ void * Function_destructor(){};
 void * Function_bind(const void * this){};
 void * Function_call(const struct Function this, int va_length, ...) {
   va_list args;
-  // for(
   assert(this.constructor);
   return this.constructor(this, va_length, &args);
 };
