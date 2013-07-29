@@ -15,21 +15,7 @@ struct Object {
   struct Hash * hash;
   int length; // number of keys
   void * (* set)(void * this, char * key, void * value); // set value of given key
-  void * (* get)(void * this, char * key); // get value of given key
-};
-
-struct Function {
-  // Functions are compatible with Objects
-  struct Hash hash;
-  int length; // number of keys
-  void * (* set)(void * this, char * key, void * value); // set value of given key
-  void * (* get)(void * this, char * key); // get value of given key
-
-  void * (* constructor)(); // optional, if function
-  void * (* destructor)(); // optional, dealloc
-  void * (* bind)(const void * this); // change value of this
-  void * (* call)(const struct Function this, int va_length, ...); // calls constructor with variable arguments
-  void * (* apply)(); // calls constructor given array of arguments
+  void * (* get)(const void * this, char * key); // get value of given key
 };
 
 void * Object_set(void * _this, char * key, void * value) {
@@ -39,12 +25,36 @@ void * Object_set(void * _this, char * key, void * value) {
   strcpy(item->value, value);
   HASH_ADD_STR(this->hash, key, item);
 }
-void * Object_get(void * _this, char * key) {
-  struct Object * this = _this;
+void * Object_get(const void * _this, char * key) {
+  const struct Object * this = _this;
   struct Hash * item;
   HASH_FIND_STR(this->hash, key, item);
   return item->value;
 }
+
+struct Object new_Object(void) {
+  struct Object o = {
+    length: 0,
+    set: Object_set,
+    get: Object_get
+  };
+  return o;
+}
+
+struct Function {
+  // Functions are compatible with Objects
+  struct Hash hash;
+  int length; // number of keys
+  void * (* set)(void * this, char * key, void * value); // set value of given key
+  void * (* get)(const void * this, char * key); // get value of given key
+
+  void * (* constructor)(); // optional, if function
+  void * (* destructor)(); // optional, dealloc
+  void * (* bind)(const void * this); // change value of this
+  void * (* call)(const struct Function this, int va_length, ...); // calls constructor with variable arguments
+  void * (* apply)(); // calls constructor given array of arguments
+};
+
 void * Function_constructor(){};
 void * Function_destructor(){};
 void * Function_bind(const void * this){};
@@ -68,16 +78,13 @@ struct Function new_Function(void * f) {
   return this;
 }
 
-void * new() {
-  //return struct Object Object = {
-  //  Object_constructor,
-  //  Object_destructor,
-  //  Object_length,
-  //  Object_set,
-  //  Object_get,
-  //  Object_call,
-  //  Object_apply
-  //}
+struct Function * new(const struct Function this, int va_length, ...) {
+  va_list args;
+  assert(this.constructor);
+  this.constructor(this, va_length, &args);
+  // should malloc fresh copies of each prototype object key
+  // and return a pointer to them below
+  return this.get(&this, "prototype");
 }
 
 void * delete() {
