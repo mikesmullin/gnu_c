@@ -27,24 +27,26 @@ void main() {
   _f = new_Function(lambda(int, (void) { return 4; }));
   A.set(&A, "c", (void *) &_f);
 
-  int (*f)(void) = A.get(&A, "a");
-  printf("%i\n", f());
+  //int (*f)(void) = A.get(&A, "a");
+  struct Function * f = A.get(&A, "a");
+  int ii = f->call(*f, 0);
+  printf("%i\n", ii);
 
-  f = A.get(&A, "c");
-  printf("%i\n", f());
+  //f = A.get(&A, "c");
+  //printf("%i\n", f());
 
-  struct Object * p = A.get(&A, "prototype");
-  printf("A.prototype is %p\n", p);
+  //struct Object * p = A.get(&A, "prototype");
+  //printf("A.prototype is %p\n", p);
 
-  f = p->get(p, "b");
-  printf("A.prototype.b() is %i\n", f());
+  //f = p->get(p, "b");
+  //printf("A.prototype.b() is %i\n", f());
 
-  struct Function * a = new(A, 0); // this should invoke our constructor from above
-  f = a->get(&a, "a");
-  printf("%i\n", f());
+  //struct Function * a = new(A, 0); // this should invoke our constructor from above
+  //f = a->get(&a, "a");
+  //printf("%i\n", f());
 
-  f = a->get(&a, "b");
-  printf("%i\n", f());
+  //f = a->get(&a, "b");
+  //printf("%i\n", f());
 
   //A.call(A, 0);
   //int i = 1;
