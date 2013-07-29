@@ -67,6 +67,40 @@ void main() {
   int ii = f->call(*f, 0); // fails because call doesn't know the lambda return type
   printf("%i\n", ii);
 
+  /*
+  ROADBLOCK:
+
+  (6:58:54 PM) _numbers: how is the data from variables in dynamically typed languages represented at the C or ASM level? any good books or examples revealing the wizard behind the curtain on these details?
+  (6:58:55 PM) frog_sha0: comex: I know. :)
+  (6:59:18 PM) pippijn: _numbers: tagged union, for example
+  (6:59:32 PM) comex: _numbers: depends on the VM.  in efficient VMs, it gets really complicated
+  (6:59:58 PM) comex: in something like Python, which is not, you can look at PyObject, pretty straightforward
+  (7:00:44 PM) pippijn: https://paste.xinu.at/zZFnE/ <- perl
+  (7:01:57 PM) _numbers: ah i c. great examples. thx :)
+
+  ok so i realize now how pure ASM or C binaries can use so little memory.
+  whereas the same app in another dynamically typed language is likely
+  way over-allocating memory "just in case".
+
+  however it also means if i want a dynamically typed feeling in C
+  which is basically what its turning out i'm after
+  (all this typing is exhausting)
+
+  i'll have to make structs that represent the dynamically typed data types that
+  i want to represent. in a way that you can just look at the struct and know what
+  type it is. may as well do the same with arguments; make a struct that
+  tracks their length and composes them before passing to a function, or something.
+  i'm basically reverse engineering javascript a bit here
+
+  see also:
+  http://stackoverflow.com/questions/5384762/tiny-javascript-implementation
+
+  this one is very close to what i'm doing:
+  https://code.google.com/p/tiny-js/source/browse/trunk/TinyJS.cpp
+  http://www.w3schools.com/js/js_datatypes.asp
+  http://stackoverflow.com/questions/307179/what-is-javascripts-max-int-whats-the-highest-integer-value-a-number-can-go-t
+  */
+
   //f = A.get(&A, "c");
   //printf("%i\n", f());
 
