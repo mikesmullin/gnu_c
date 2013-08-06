@@ -13,3 +13,4 @@
 * http://www.oualline.com/style/c03.html
 * http://www.embedded.com/discussion/other/4024626/Object-Oriented-C-Creating-Foundation-Classes-Part-1
 * http://gcc.gnu.org/onlinedocs/gcc-2.95.3/cpp_1.html#SEC11
+* LOL! http://thread.gmane.org/gmane.comp.version-control.git/57643/focus=57918
